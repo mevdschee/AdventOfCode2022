@@ -1,6 +1,6 @@
 # AdventOfCode2022
 
-Advent of Code 2021 puzzle solutions in VB.net
+Advent of Code 2022 puzzle solutions in VB.net
 
 See: http://adventofcode.com/2022/
 
