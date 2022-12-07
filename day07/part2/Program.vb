@@ -45,15 +45,17 @@ Module Program
             files(kv.Key) = sum
         Next
 
-        Dim total = 0
-        For Each kv In files
-            Dim sum = kv.Value
-            If sum <= 100000 Then
-                total += sum
+        Dim totals = files.OrderBy(Function(kv) kv.Value)
+        Dim free = 70000000 - files("/")
+        Dim result = 0
+        For Each kv In totals
+            If free + kv.Value >= 30000000 Then
+                result = kv.Value
+                Exit For
             End If
         Next
 
-        Console.WriteLine(total)
+        Console.WriteLine(result)
 
     End Sub
 End Module
