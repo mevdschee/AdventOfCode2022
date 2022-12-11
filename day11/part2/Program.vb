@@ -4,7 +4,7 @@ Module Program
 
     Sub Main()
 
-        Dim input = File.ReadAllText("input").Trim()
+        Dim input = File.ReadAllText("input").Replace(vbCrLf, vbLf).Trim()
         Dim monkeys = new List(Of List(Of Long))()
         Dim operations = new List(Of List(Of String))()
         Dim devisors = new List(Of Long)()
