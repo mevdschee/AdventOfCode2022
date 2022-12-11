@@ -4,7 +4,7 @@ Module Program
 
     Sub Main()
 
-        Dim input = File.ReadAllText("input")
+        Dim input = File.ReadAllText("input").Replace(vbCrLf, vbLf)
         Dim lines = input.Trim().Split(vbLf)
         Dim fields = New Dictionary(Of (x as Integer, y as Integer), Integer)()
         Dim visible = New Dictionary(Of (x as Integer, y as Integer), Boolean)()

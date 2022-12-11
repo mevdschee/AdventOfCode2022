@@ -4,7 +4,7 @@ Module Program
 
     Sub Main()
 
-        Dim input = File.ReadAllText("input")
+        Dim input = File.ReadAllText("input").Replace(vbCrLf, vbLf)
         Dim elves = input.Trim().Split(vbLf & vbLf)
         Dim max = 0
 

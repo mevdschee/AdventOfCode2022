@@ -3,7 +3,7 @@ Imports System.IO
 Module Program
     Sub Main()
 
-        Dim input = File.ReadAllText("input").Trim()
+        Dim input = File.ReadAllText("input").Replace(vbCrLf, vbLf).Trim()
         Dim recent = ""
         Dim result = 0
         

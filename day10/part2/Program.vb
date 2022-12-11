@@ -4,7 +4,7 @@ Module Program
 
     Sub Main()
 
-        Dim input = File.ReadAllText("input")
+        Dim input = File.ReadAllText("input").Replace(vbCrLf, vbLf)
         input = input.Replace("addx","cycle" & vbLf & "addx")
         Dim lines = input.Trim().Split(vbLf)
         Dim registers = new Dictionary(Of String, Integer)()

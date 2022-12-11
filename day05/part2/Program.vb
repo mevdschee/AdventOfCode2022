@@ -3,7 +3,7 @@ Imports System.IO
 Module Program
     Sub Main()
 
-        Dim input = File.ReadAllText("input")
+        Dim input = File.ReadAllText("input").Replace(vbCrLf, vbLf)
         Dim parts = input.Split(vbLf & vbLf)
         Dim lines = parts(0).Split(vbLf)
         Dim columns = (lines(0).Length() + 1)/4

@@ -4,7 +4,7 @@ Module Program
 
     Sub Main()
 
-        Dim input = File.ReadAllText("input")
+        Dim input = File.ReadAllText("input").Replace(vbCrLf, vbLf)
         Dim games = input.Trim().Split(vbLf)
         Dim points = 0
 

@@ -4,7 +4,7 @@ Module Program
 
     Sub Main()
 
-        Dim input = File.ReadAllText("input")
+        Dim input = File.ReadAllText("input").Replace(vbCrLf, vbLf)
         Dim lines = input.Trim().Split(vbLf)
         Dim head = (x:=0, y:=0)
         Dim tail = (x:=0, y:=0)
