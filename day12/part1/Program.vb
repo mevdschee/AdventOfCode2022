@@ -2,10 +2,6 @@ Imports System.IO
 
 Module Program
 
-    Function Traverse(paths As List(Of List(Of (x As Integer, y As Integer))), width As Integer, height As Integer, goal As (x As Integer, y As Integer), fields As Dictionary(Of (Integer, Integer), Integer)) As Integer
-
-    End Function
-
     Sub Main()
 
         Dim input = File.ReadAllText("input")
