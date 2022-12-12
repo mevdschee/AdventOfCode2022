@@ -4,7 +4,7 @@ Module Program
 
     Sub Main()
 
-        Dim input = File.ReadAllText("input.test")
+        Dim input = File.ReadAllText("input")
         Dim lines = input.Trim().Replace(vbCrLf, vbLf).Split(vbLf)
         Dim fields = New Dictionary(Of (Integer, Integer), Integer)()
         Dim distances = New Dictionary(Of (Integer, Integer), Integer)()
@@ -41,9 +41,13 @@ Module Program
                     If newPos.x < 0 Or newPos.y < 0 Or newPos.x >= width Or newPos.y >= height Then
                         Continue For
                     End If
-                    If fields(newPos) > fields(pos) + 1 Or fields(newPos) < fields(pos) Then
+                    If fields(newPos) > fields(pos) + 1 Then
                         Continue For
                     End If
+                    If distances.ContainsKey(newPos) Then
+                        Continue For
+                    End If
+                    distances(newPos) = steps
                     If newFrontier.Contains(newPos) Then
                         Continue For
                     End If
