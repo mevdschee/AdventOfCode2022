@@ -37,7 +37,7 @@ Module Program
 
         Dim count = 0
         Dim sand As (x As Integer, y As Integer) = (500,0)
-        Do While True
+        Do Until field.ContainsKey(sand)
             If Not field.ContainsKey((sand.x,sand.y+1)) And Not sand.y+1>=maxy+2 Then
                 sand.y += 1
             ElseIf Not field.ContainsKey((sand.x-1,sand.y+1)) And Not sand.y+1>=maxy+2 Then
@@ -50,9 +50,6 @@ Module Program
                 field(sand) = "o"
                 count += 1
                 sand = (500,0)
-                if field.ContainsKey(sand) Then
-                    Exit Do
-                End If
             End If
         Loop
 
