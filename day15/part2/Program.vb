@@ -66,7 +66,7 @@ Module Program
             Next e
         Next
 
-        Dim result As Long
+        Dim result As Long = 0
         For Each edge In edges.Keys
             Dim found = True
             For Each kv In sensors
