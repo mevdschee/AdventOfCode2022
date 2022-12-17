@@ -36,7 +36,7 @@ Module Program
     
     Function Permutate(time As Integer, pos As String, path As List(Of String), nodes As List(Of String), flows As Dictionary(Of String, Integer), distances As Dictionary(Of (String, String), Integer)) As Integer
         
-        If time < 0 Or path.Count = nodes.Count Then
+        If path.Count = nodes.Count Then
             Return 0
         End If
 
@@ -48,7 +48,9 @@ Module Program
             Dim newPath = New List(Of String)(path)
             newPath.Add(newPos)
             Dim newTime = time - distances((pos, newPos)) - 1
-            best = Math.Max(best, flows(newPos)*newtime + Permutate(newTime, newPos, newPath, nodes, flows, distances))
+            If newTime>0 Then
+                best = Math.Max(best, flows(newPos)*newtime + Permutate(newTime, newPos, newPath, nodes, flows, distances))
+            End If
         Next
 
         Return best
@@ -57,7 +59,7 @@ Module Program
 
     Sub Main()
 
-        Dim input = File.ReadAllText("input").Trim().Replace(vbCrLf, vbLf)
+        Dim input = File.ReadAllText("input.test").Trim().Replace(vbCrLf, vbLf)
         Dim lines = input.Split(vbLf)
         Dim flows = New Dictionary(Of String, Integer)()
         Dim connections = New Dictionary(Of String, String())()
@@ -73,7 +75,7 @@ Module Program
 
         Dim distances = Calculate(connections)
 
-        Dim path = New List(Of String)({"AA"})
+        Dim path = New List(Of String)({})
         Dim nodes = flows.Keys.Where(Function (valve) flows(valve)>0).ToList()
         Dim best = Permutate(30, "AA", path, nodes, flows, distances)
         
