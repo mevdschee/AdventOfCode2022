@@ -59,7 +59,7 @@ Module Program
 
     Sub Main()
 
-        Dim input = File.ReadAllText("input.test").Trim().Replace(vbCrLf, vbLf)
+        Dim input = File.ReadAllText("input").Trim().Replace(vbCrLf, vbLf)
         Dim lines = input.Split(vbLf)
         Dim flows = New Dictionary(Of String, Integer)()
         Dim connections = New Dictionary(Of String, String())()
