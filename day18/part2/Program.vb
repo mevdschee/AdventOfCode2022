@@ -27,8 +27,10 @@ Module Program
 
         Dim water = New Dictionary(Of (x As Integer, y As Integer, z As Integer), Boolean)()
         Dim frontier = New List(Of (x As Integer, y As Integer, z As Integer))()
-        water((0,0,0)) = True
-        frontier.Add((0,0,0))
+        water((min.x-1,min.y-1,min.z-1)) = True
+        water((max.x+1,max.y+1,max.z+1)) = True
+        frontier.Add((min.x-1,min.y-1,min.z-1))
+        frontier.Add((max.x+1,max.y+1,max.z+1))
         Do While frontier.Count > 0
             Dim newFrontier = New List(Of (x As Integer, y As Integer, z As Integer))()
             For Each c In frontier
