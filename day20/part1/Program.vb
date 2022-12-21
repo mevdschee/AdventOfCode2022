@@ -22,8 +22,7 @@ Module Program
 
             Dim oldpos = sequence.IndexOf(i)
             sequence.RemoveAt(oldpos)
-            Dim number = numbers(i)
-            Dim newpos = MathMod(oldpos+number, sequence.Count)
+            Dim newpos = MathMod(oldpos+numbers(i), sequence.Count)
             sequence.Insert(newpos, i)
             
         Next
