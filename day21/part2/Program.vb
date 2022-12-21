@@ -11,9 +11,8 @@ Module Program
         Dim expressions = New Dictionary(Of Integer,(name As String, arg1 As String, op As Char, arg2 As String))()
         
         For Each line In lines
-            Dim match
             
-            match = Regex.Match(line, "([a-z]+): ([0-9]+)")
+            Dim match = Regex.Match(line, "([a-z]+): ([0-9]+)")
             If match.Success Then
                 Dim name = match.Groups(1).Value
                 Dim value = Integer.Parse(match.Groups(2).Value)
@@ -53,6 +52,7 @@ Module Program
                         expressions(expressions.Count) = (name, arg2, "=", arg1)
                 End Select
             End If
+            
         Next
 
         Do Until expressions.Count=0
