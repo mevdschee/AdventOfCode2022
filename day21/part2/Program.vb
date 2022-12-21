@@ -12,6 +12,7 @@ Module Program
         
         For Each line In lines
             Dim match
+            
             match = Regex.Match(line, "([a-z]+): ([0-9]+)")
             If match.Success Then
                 Dim name = match.Groups(1).Value
@@ -20,8 +21,8 @@ Module Program
                     monkeys(name) = value
                 End If
             End If
-            match = Regex.Match(line, "([a-z]+): ([a-z]+) ([-+*/]) ([a-z]+)")
 
+            match = Regex.Match(line, "([a-z]+): ([a-z]+) ([-+*/]) ([a-z]+)")
             If match.Success Then
                 Dim name = match.Groups(1).Value
                 Dim arg1 = match.Groups(2).Value
@@ -55,8 +56,11 @@ Module Program
         Next
 
         Do Until expressions.Count=0
+
             For Each i In expressions.Keys
+                
                 Dim e = expressions(i)
+                
                 If e.name = "root" Then
                     If monkeys.ContainsKey(e.arg1) Then
                         monkeys(e.arg2) = monkeys(e.arg1)
