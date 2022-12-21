@@ -1,5 +1,4 @@
 Imports System.IO
-Imports System.Text.RegularExpressions
 
 Module Program
 
