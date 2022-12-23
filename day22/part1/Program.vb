@@ -30,36 +30,11 @@ Module Program
             Dim turn = match.Groups(2).Value
             
             For s=0 To steps-1
-                Dim newpos As (x As Integer, y As Integer) = pos
-                Select (dir)
-                    Case 0 ' right
-                        newpos = (newpos.x+1, newpos.y)
-                    Case 3 ' up
-                        newpos = (newpos.x, newpos.y-1)
-                    Case 2 ' left
-                        newpos = (newpos.x-1, newpos.y)
-                    Case 1 ' down
-                        newpos = (newpos.x, newpos.y+1)
-                End Select
+                Dim newpos As (x As Integer, y As Integer) = (pos.x - (dir-1) Mod 2, pos.y - (dir-2) Mod 2)
                 If Not fields.ContainsKey(newpos) Then
-                    Select (dir)
-                        Case 0 ' right
-                            Do While fields.ContainsKey((newpos.x-1, newpos.y))
-                                newpos = (newpos.x-1, newpos.y)
-                            Loop                            
-                        Case 3 ' up
-                            Do While fields.ContainsKey((newpos.x, newpos.y+1))
-                                newpos = (newpos.x, newpos.y+1)
-                            Loop                            
-                        Case 2 ' left
-                            Do While fields.ContainsKey((newpos.x+1, newpos.y))
-                                newpos = (newpos.x+1, newpos.y)
-                            Loop                            
-                        Case 1 ' down
-                            Do While fields.ContainsKey((newpos.x, newpos.y-1))
-                                newpos = (newpos.x, newpos.y-1)
-                            Loop                            
-                    End Select
+                    Do While fields.ContainsKey((newpos.x + (dir-1) Mod 2, newpos.y + (dir-2) Mod 2))
+                        newpos = (newpos.x + (dir-1) Mod 2, newpos.y + (dir-2) Mod 2)
+                    Loop                            
                 End If
                 If fields(newpos)<>"#" Then
                     pos = newpos
@@ -68,7 +43,7 @@ Module Program
 
             Select (turn)
                 Case "L"
-                    dir = (dir-1+4) Mod 4
+                    dir = (dir+3) Mod 4
                 Case "R"
                     dir = (dir+1) Mod 4
             End Select
