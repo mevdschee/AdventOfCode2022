@@ -34,7 +34,7 @@ Module Program
                 If Not fields.ContainsKey(newpos) Then
                     Do While fields.ContainsKey((newpos.x + (dir-1) Mod 2, newpos.y + (dir-2) Mod 2))
                         newpos = (newpos.x + (dir-1) Mod 2, newpos.y + (dir-2) Mod 2)
-                    Loop                            
+                    Loop
                 End If
                 If fields(newpos)<>"#" Then
                     pos = newpos
