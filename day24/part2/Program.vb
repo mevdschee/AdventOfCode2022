@@ -75,7 +75,7 @@ Module Program
         Dim width = lines(0).Count - 2
         Dim height = lines.Count - 2
         Dim field = New Dictionary(Of (x As Integer, y As Integer), List(Of Integer))()
-        Dim start As (x As Integer, y As Integer) = (1, -1)
+        Dim start As (x As Integer, y As Integer) = (0, -1)
         Dim goal As (x As Integer, y As Integer) = (width - 1, height)
 
         For y = 0 To height - 1
@@ -104,7 +104,3 @@ Module Program
     End Sub
 
 End Module
-
-' 705  is too low.
-' 762 is too high
-' 760 incorrect
