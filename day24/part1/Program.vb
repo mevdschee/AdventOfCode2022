@@ -7,15 +7,15 @@ Module Program
         Dim input = File.ReadAllText("input").Replace(vbCrLf, vbLf)
         Dim lines = input.Trim().Split(vbLf)
         Dim field = New Dictionary(Of (x As Integer, y As Integer), List(Of Integer))()
-        Dim start As (x As Integer, y As Integer) = (1,-1)
-        Dim goal As (x As Integer, y As Integer) = (lines(0).Count-2-1,lines.Count-2)
-        Dim width = lines(0).Count-2
-        Dim height = lines.Count-2
+        Dim start As (x As Integer, y As Integer) = (1, -1)
+        Dim goal As (x As Integer, y As Integer) = (lines(0).Count - 2 - 1, lines.Count - 2)
+        Dim width = lines(0).Count - 2
+        Dim height = lines.Count - 2
 
-        For y = 0 To height-1
-            For x = 0 To width-1
-                Dim list = new List(Of Integer)()
-                Select lines(y+1).Substring(x+1,1)
+        For y = 0 To height - 1
+            For x = 0 To width - 1
+                Dim list = New List(Of Integer)()
+                Select Case lines(y + 1).Substring(x + 1, 1)
                     Case ">"
                         list.Add(0)
                     Case "v"
@@ -34,28 +34,28 @@ Module Program
         frontiers(start) = True
         For i = 0 To 100000
             Dim newfield = New Dictionary(Of (x As Integer, y As Integer), List(Of Integer))()
-            For y = 0 To height-1
-                For x = 0 To width-1
-                    newfield((x, y)) = new List(Of Integer)()
+            For y = 0 To height - 1
+                For x = 0 To width - 1
+                    newfield((x, y)) = New List(Of Integer)()
                 Next x
             Next y
             For Each kv In field
                 Dim pos = kv.Key
                 For Each blizzard In kv.Value
-                    Dim newpos As (x As Integer, y As Integer) = (pos.x - (blizzard-1) Mod 2, pos.y - (blizzard-2) Mod 2)
+                    Dim newpos As (x As Integer, y As Integer) = (pos.x - (blizzard - 1) Mod 2, pos.y - (blizzard - 2) Mod 2)
                     If Not newfield.ContainsKey(newpos) Then
-                        Do While newfield.ContainsKey((newpos.x + (blizzard-1) Mod 2, newpos.y + (blizzard-2) Mod 2))
-                            newpos = (newpos.x + (blizzard-1) Mod 2, newpos.y + (blizzard-2) Mod 2)
+                        Do While newfield.ContainsKey((newpos.x + (blizzard - 1) Mod 2, newpos.y + (blizzard - 2) Mod 2))
+                            newpos = (newpos.x + (blizzard - 1) Mod 2, newpos.y + (blizzard - 2) Mod 2)
                         Loop
                     End If
-                    newfield(newpos).Add(blizzard)                                                
-                Next                
+                    newfield(newpos).Add(blizzard)
+                Next
             Next
             Dim newfrontiers = New Dictionary(Of (x As Integer, y As Integer), Boolean)()
             For Each kv In frontiers
                 Dim pos = kv.Key
-                For d=0 To 3
-                    Dim newpos As (x As Integer, y As Integer) = (pos.x - (d-1) Mod 2, pos.y - (d-2) Mod 2)
+                For d = 0 To 3
+                    Dim newpos As (x As Integer, y As Integer) = (pos.x - (d - 1) Mod 2, pos.y - (d - 2) Mod 2)
                     If newfield.ContainsKey(newpos) Then
                         If newfield(newpos).Count = 0 Then
                             newfrontiers(newpos) = True
