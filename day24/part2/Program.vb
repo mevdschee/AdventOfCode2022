@@ -2,12 +2,14 @@ Imports System.IO
 
 Module Program
 
-    Function Traverse(start As (x As Integer, y As Integer), goal As (x As Integer, y As Integer), width As Integer, height As Integer, field As Dictionary(Of (x As Integer, y As Integer), List(Of Integer)))
+    Function Traverse(start As (x As Integer, y As Integer), goal As (x As Integer, y As Integer), width As Integer, height As Integer, field As Dictionary(Of (x As Integer, y As Integer), List(Of Integer))) As Integer
+
+        Dim origfield = field
 
         Dim round = 0
         Dim frontiers = New Dictionary(Of (x As Integer, y As Integer), Boolean)()
         frontiers(start) = True
-        For i = 0 To 100000
+        For i = 1 To 100000
             Dim newfield = New Dictionary(Of (x As Integer, y As Integer), List(Of Integer))()
             For y = 0 To height - 1
                 For x = 0 To width - 1
@@ -49,13 +51,18 @@ Module Program
                     newfrontiers(pos) = True
                 End If
             Next
+            frontiers = newfrontiers
+            field = newfield
             If frontiers.ContainsKey(goal) Then
                 round = i
                 Exit For
             End If
-            frontiers = newfrontiers
-            field = newfield
         Next i
+
+        origfield.Clear()
+        For Each kv In field
+            origfield(kv.Key) = kv.Value
+        Next
 
         Return round
 
@@ -97,3 +104,7 @@ Module Program
     End Sub
 
 End Module
+
+' 705  is too low.
+' 762 is too high
+' 760 incorrect

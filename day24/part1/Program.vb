@@ -4,7 +4,7 @@ Module Program
 
     Sub Main()
 
-        Dim input = File.ReadAllText("input.test").Replace(vbCrLf, vbLf)
+        Dim input = File.ReadAllText("input").Replace(vbCrLf, vbLf)
         Dim lines = input.Trim().Split(vbLf)
         Dim width = lines(0).Count - 2
         Dim height = lines.Count - 2
@@ -32,7 +32,7 @@ Module Program
         Dim round = 0
         Dim frontiers = New Dictionary(Of (x As Integer, y As Integer), Boolean)()
         frontiers(start) = True
-        For i = 0 To 100000
+        For i = 1 To 100000
             Dim newfield = New Dictionary(Of (x As Integer, y As Integer), List(Of Integer))()
             For y = 0 To height - 1
                 For x = 0 To width - 1
@@ -74,12 +74,12 @@ Module Program
                     newfrontiers(pos) = True
                 End If
             Next
+            frontiers = newfrontiers
+            field = newfield
             If frontiers.ContainsKey(goal) Then
                 round = i
                 Exit For
             End If
-            frontiers = newfrontiers
-            field = newfield
         Next i
 
         Console.WriteLine(round)
