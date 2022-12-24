@@ -2,32 +2,7 @@ Imports System.IO
 
 Module Program
 
-    Sub Main()
-
-        Dim input = File.ReadAllText("input.test").Replace(vbCrLf, vbLf)
-        Dim lines = input.Trim().Split(vbLf)
-        Dim width = lines(0).Count - 2
-        Dim height = lines.Count - 2
-        Dim field = New Dictionary(Of (x As Integer, y As Integer), List(Of Integer))()
-        Dim start As (x As Integer, y As Integer) = (1, -1)
-        Dim goal As (x As Integer, y As Integer) = (width - 1, height)
-
-        For y = 0 To height - 1
-            For x = 0 To width - 1
-                Dim list = New List(Of Integer)()
-                Select Case lines(y + 1).Substring(x + 1, 1)
-                    Case ">"
-                        list.Add(0)
-                    Case "v"
-                        list.Add(1)
-                    Case "<"
-                        list.Add(2)
-                    Case "^"
-                        list.Add(3)
-                End Select
-                field((x, y)) = list
-            Next x
-        Next y
+    Function Traverse(start As (x As Integer, y As Integer), goal As (x As Integer, y As Integer), width As Integer, height As Integer, field As Dictionary(Of (x As Integer, y As Integer), List(Of Integer)))
 
         Dim round = 0
         Dim frontiers = New Dictionary(Of (x As Integer, y As Integer), Boolean)()
@@ -82,7 +57,42 @@ Module Program
             field = newfield
         Next i
 
-        Console.WriteLine(round)
+        Return round
+
+    End Function
+
+    Sub Main()
+
+        Dim input = File.ReadAllText("input").Replace(vbCrLf, vbLf)
+        Dim lines = input.Trim().Split(vbLf)
+        Dim width = lines(0).Count - 2
+        Dim height = lines.Count - 2
+        Dim field = New Dictionary(Of (x As Integer, y As Integer), List(Of Integer))()
+        Dim start As (x As Integer, y As Integer) = (1, -1)
+        Dim goal As (x As Integer, y As Integer) = (width - 1, height)
+
+        For y = 0 To height - 1
+            For x = 0 To width - 1
+                Dim list = New List(Of Integer)()
+                Select Case lines(y + 1).Substring(x + 1, 1)
+                    Case ">"
+                        list.Add(0)
+                    Case "v"
+                        list.Add(1)
+                    Case "<"
+                        list.Add(2)
+                    Case "^"
+                        list.Add(3)
+                End Select
+                field((x, y)) = list
+            Next x
+        Next y
+
+        Dim sum = 0
+        sum += Traverse(start, goal, width, height, field)
+        sum += Traverse(goal, start, width, height, field)
+        sum += Traverse(start, goal, width, height, field)
+        Console.WriteLine(sum)
 
     End Sub
 
