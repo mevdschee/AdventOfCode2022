@@ -22,15 +22,16 @@ Module Program
                 Dim pos = kv.Key
                 Dim newpos = pos
                 For j = 0 To 4 - 1
-                    Dim checkpos = New List(Of (x As Integer, y As Integer))()
-                    checkpos.Add((pos.x - 1, pos.y - 1))
-                    checkpos.Add((pos.x + 0, pos.y - 1))
-                    checkpos.Add((pos.x + 1, pos.y - 1))
-                    checkpos.Add((pos.x - 1, pos.y + 0))
-                    checkpos.Add((pos.x + 1, pos.y + 0))
-                    checkpos.Add((pos.x - 1, pos.y + 1))
-                    checkpos.Add((pos.x + 0, pos.y + 1))
-                    checkpos.Add((pos.x + 1, pos.y + 1))
+                    Dim checkpos = New List(Of (x As Integer, y As Integer)) From {
+                        (pos.x - 1, pos.y - 1),
+                        (pos.x + 0, pos.y - 1),
+                        (pos.x + 1, pos.y - 1),
+                        (pos.x - 1, pos.y + 0),
+                        (pos.x + 1, pos.y + 0),
+                        (pos.x - 1, pos.y + 1),
+                        (pos.x + 0, pos.y + 1),
+                        (pos.x + 1, pos.y + 1)
+                    }
                     Dim neighbours = 0
                     For Each cp In checkpos
                         If field.ContainsKey(cp) Then
