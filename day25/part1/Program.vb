@@ -9,7 +9,6 @@ Module Program
         Dim characters = "=-012"
 
         Dim total As Long = 0
-
         For Each line In lines
             Dim sum as Long = 0
             For p=0 To line.Length-1
